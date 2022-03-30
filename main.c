@@ -4,12 +4,6 @@
 #include <sysexits.h>
 #include <unistd.h>
 #include "hazlab2.h"
-extern bool is_positive_integer(char *);
-extern int **generate_matrix(int, bool);
-extern void deallocate_all(void);
-#ifndef NDEBUG
-extern void print_matrix(int, int *[]);
-#endif
 
 
 int main(int argc, char *argv[])

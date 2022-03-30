@@ -2,8 +2,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include "hazlab2.h"
-extern void *allocate(size_t);
-extern int random_integer(const int);
 
 
 static bool make_path(const int size, int *lines[], const int from_i, const int from_j, const int id)
