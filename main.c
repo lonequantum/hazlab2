@@ -7,7 +7,9 @@
 extern bool is_positive_integer(char *);
 extern int **generate_matrix(int, bool);
 extern void deallocate_all(void);
+#ifndef NDEBUG
 extern void print_matrix(int, int *[]);
+#endif
 
 
 int main(int argc, char *argv[])
@@ -59,6 +61,8 @@ int main(int argc, char *argv[])
 	if (matrix == NULL)
 		return EXIT_FAILURE;
 
+#ifndef NDEBUG
 	print_matrix(size, matrix);
+#endif
 	return EXIT_SUCCESS;
 }
