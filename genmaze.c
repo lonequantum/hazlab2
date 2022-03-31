@@ -20,10 +20,14 @@ static bool make_path(const int size, int *lines[], const int from_i, const int 
 		i = from_i, j = from_j;
 		switch (direction)
 		{
-		case 0: i-= 2; break;
-		case 1: j+= 2; break;
-		case 2: i+= 2; break;
-		case 3: j-= 2;
+		case 0:
+			i-= 2; break;
+		case 1:
+			j+= 2; break;
+		case 2:
+			i+= 2; break;
+		case 3:
+			j-= 2;
 		}
 		if (i == -1 || i == size || j == -1 || j == size || lines[i][j] == id)
 			directions[direction] = false;
@@ -34,10 +38,14 @@ static bool make_path(const int size, int *lines[], const int from_i, const int 
 
 	switch (direction)
 	{
-	case 0: lines[from_i - 1][from_j] = 1; break;
-	case 1: lines[from_i][from_j + 1] = 1; break;
-	case 2: lines[from_i + 1][from_j] = 1; break;
-	case 3: lines[from_i][from_j - 1] = 1;
+	case 0:
+		lines[from_i - 1][from_j] = 1; break;
+	case 1:
+		lines[from_i][from_j + 1] = 1; break;
+	case 2:
+		lines[from_i + 1][from_j] = 1; break;
+	case 3:
+		lines[from_i][from_j - 1] = 1;
 	}
 
 	if (lines[i][j] == 0)
@@ -74,10 +82,14 @@ int **generate_matrix(const int size, const bool perfect)
 	int exit = random_integer(size / 2) * 2 + 1;
 	switch (random_integer(4))
 	{
-	case 0: lines[   0    ][exit] = 1; break;
-	case 1: lines[size - 1][exit] = 1; break;
-	case 2: lines[exit][   0    ] = 1; break;
-	case 3: lines[exit][size - 1] = 1;
+	case 0:
+		lines[   0    ][exit] = 1; break;
+	case 1:
+		lines[size - 1][exit] = 1; break;
+	case 2:
+		lines[exit][   0    ] = 1; break;
+	case 3:
+		lines[exit][size - 1] = 1;
 	}
 
 	if (perfect == false)
