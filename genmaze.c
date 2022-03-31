@@ -4,6 +4,7 @@
 #include "hazlab2.h"
 
 
+// Defines a series of contiguous paths in the given matrix
 static bool make_path(const int size, int *lines[], const int from_i, const int from_j, const int id)
 {
 	lines[from_i][from_j] = id;
@@ -55,6 +56,9 @@ static bool make_path(const int size, int *lines[], const int from_i, const int 
 }
 
 
+// Creates a new random square matrix of integers, refered to as an array of lines
+// Walls == 0
+// Paths != 0
 int **generate_matrix(const int size, const bool perfect)
 {
 	int **lines = allocate(size * sizeof(int*));
@@ -69,6 +73,7 @@ int **generate_matrix(const int size, const bool perfect)
 	for (int s = 0; s < size; s++)
 		lines[s] = space + s * size;
 
+	// Makes a perfect (no-loop) maze by "digging" paths in the matrix
 	int path_id = 0;
 	for (int i = 1; i < size; i+= 2)
 		for (int j = 1; j < size; j+= 2)
@@ -79,6 +84,7 @@ int **generate_matrix(const int size, const bool perfect)
 				while (make_path(size, lines, i, j, path_id) == false && ++tries < 4);
 			}
 
+	// Ramdomly places an exit on one of the edges
 	int exit = random_integer(size / 2) * 2 + 1;
 	switch (random_integer(4))
 	{
@@ -92,6 +98,7 @@ int **generate_matrix(const int size, const bool perfect)
 		lines[exit][size - 1] = 1;
 	}
 
+	// If requested (default behavior), adds paths so the maze has loops
 	if (perfect == false)
 	{
 		int max_additionnal_paths = size * size / NON_PERFECT_RATIO;

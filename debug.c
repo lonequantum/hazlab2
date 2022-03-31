@@ -4,6 +4,7 @@
 #include "hazlab2.h"
 
 
+// Prints a 2D view of the generated maze on standard output
 void print_matrix(int size, int *lines[])
 {
 	for (int line = 0; line < size; line++)

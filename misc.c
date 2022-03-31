@@ -5,6 +5,7 @@
 #include "hazlab2.h"
 
 
+// Returns whether a string represents a positive integer
 bool is_positive_integer(const char *s)
 {
 	while (*s) if (!isdigit(*s++)) return false;
@@ -16,6 +17,7 @@ bool is_positive_integer(const char *s)
 static bool rand_initialized = false;
 
 
+// Gives a random integer value between 0 and upper_bound - 1
 int random_integer(const int upper_bound)
 {
 	if (rand_initialized == false)

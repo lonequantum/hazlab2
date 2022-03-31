@@ -7,6 +7,7 @@ static void *objects[MAX_MEM_OBJECTS];
 static size_t n_objects;
 
 
+// Wraps the use of malloc() into an easy way to manage memory
 void *allocate(const size_t bytes)
 {
 	if (n_objects == MAX_MEM_OBJECTS)
@@ -25,6 +26,7 @@ void *allocate(const size_t bytes)
 }
 
 
+// Frees all the dynamically-allocated memory (via allocate() only)
 void deallocate_all(void)
 {
 	while (n_objects)

@@ -6,6 +6,7 @@
 #include "hazlab2.h"
 
 
+// Parses the command line and launches the game
 int main(int argc, char *argv[])
 {
 	atexit(deallocate_all);
