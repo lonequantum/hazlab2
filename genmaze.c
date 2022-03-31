@@ -103,7 +103,7 @@ int **generate_matrix(const int size, const bool perfect)
 	if (perfect == false)
 	{
 		int max_additionnal_paths = size * size / NON_PERFECT_RATIO;
-		for (int n = 0; n < max_additionnal_paths; n++)
+		while (max_additionnal_paths--)
 		{
 			int i = random_integer(size / 2) * 2 + 1;
 			int j = random_integer(size / 2 - 1) * 2 + 2;
