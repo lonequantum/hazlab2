@@ -4,13 +4,14 @@
 #include "hazlab2.h"
 
 
-// Defines a series of contiguous paths in the given matrix
+// Defines a random series of contiguous paths in the given matrix
+// Returns false if the last defined path cannot join a previous series
 static bool make_path(const int size, int *lines[], const int from_i, const int from_j, const int id)
 {
 	lines[from_i][from_j] = id;
 
 	bool directions[4];
-	directions[0] = directions[1] = directions[2] = directions[3] = true;
+	directions[0] = directions[1] = directions[2] = directions[3] = true; // N, E, S, W
 	int direction = random_integer(4);
 	int i, j, tries = 0;
 	do
@@ -56,7 +57,7 @@ static bool make_path(const int size, int *lines[], const int from_i, const int 
 }
 
 
-// Creates a new random square matrix of integers, refered to as an array of lines
+// Creates a new random square matrix of integers, also refered to as an "array of lines"
 // Walls == 0
 // Paths != 0
 int **generate_matrix(const int size, const bool perfect)

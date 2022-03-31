@@ -52,6 +52,7 @@ int main(int argc, char *argv[])
 
 	size = size * 4 - 1; // real matrix size
 
+	// Creates the maze
 	int **matrix = generate_matrix(size, perfect);
 	if (matrix == NULL)
 		return EXIT_FAILURE;
