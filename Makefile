@@ -1,4 +1,4 @@
-hazlab2:
+hazlab2: clean
 	c99 -o hazlab2 *.c -D_POSIX_C_SOURCE=200809L
 
 release:
