@@ -6,4 +6,4 @@ release:
 	strip hazlab2
 
 clean:
-	rm hazlab2
+	rm -f hazlab2
