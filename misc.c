@@ -8,7 +8,9 @@
 // Returns whether a string represents a positive integer
 bool is_positive_integer(const char *s)
 {
-	while (*s) if (!isdigit(*s++)) return false;
+	while (*s)
+		if (!isdigit(*s++))
+			return false;
 
 	return true;
 }
