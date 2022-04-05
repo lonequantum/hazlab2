@@ -1,5 +1,4 @@
 #ifndef NDEBUG
-
 #include <stdio.h>
 #include "hazlab2.h"
 
@@ -22,5 +21,6 @@ void print_matrix(int size, int *lines[])
 		putchar('\n');
 	}
 }
+
 
 #endif
