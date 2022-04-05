@@ -85,6 +85,12 @@ int **generate_matrix(const int size, const bool perfect)
 				while (make_path(size, lines, i, j, path_id) == false && ++tries < 4);
 			}
 
+	// Makes all paths have the same value
+	for (int i = size - 1; i; i--)
+		for (int j = size - 1; j; j--)
+			if (lines[i][j])
+				lines[i][j] = 1;
+
 	// Ramdomly places an exit on one of the edges
 	int exit = random_integer(size / 2) * 2 + 1;
 	switch (random_integer(4))
