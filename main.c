@@ -1,9 +1,53 @@
+#include <GLFW/glfw3.h>
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <sysexits.h>
 #include <unistd.h>
 #include "hazlab2.h"
+
+
+// Defines the GLFW error callback
+void on_glfw_error(int error, const char *description)
+{
+	eprintf("(glfw error %d) %s\n", error, description);
+}
+
+
+// Initializes the context and creates the game window
+static GLFWwindow *start_graphics(void)
+{
+	if (!glfwInit())
+		return NULL;
+
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
+	glfwSetErrorCallback(on_glfw_error);
+
+	GLFWwindow *window = glfwCreateWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "Hazlab2", NULL, NULL);
+	if (!window)
+	{
+		glfwTerminate();
+		return NULL;
+	}
+
+	glfwSetWindowSizeLimits(window, WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_WIDTH, WINDOW_HEIGHT);
+	glViewport(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
+
+	glfwMakeContextCurrent(window);
+
+	return window;
+}
+
+
+// Closes the game window and destroys the context
+static void end_graphics(GLFWwindow *const window)
+{
+	glfwDestroyWindow(window);
+	glfwTerminate();
+}
 
 
 // Parses the command line and launches the game
@@ -54,11 +98,29 @@ int main(int argc, char *argv[])
 
 	// Creates the maze
 	int **matrix = generate_matrix(size, perfect);
-	if (matrix == NULL)
+	if (!matrix)
 		return EXIT_FAILURE;
-
 #ifndef NDEBUG
 	print_matrix(size, matrix);
 #endif
+
+	// Creates the window
+	GLFWwindow *window = start_graphics();
+	if (!window)
+		return EXIT_FAILURE;
+
+	// Runs the main loop
+	glfwSwapInterval(1);
+	while (!glfwWindowShouldClose(window))
+	{
+		draw_scene();
+
+		glfwSwapBuffers(window);
+		glfwPollEvents();
+	}
+
+	// Exits properly
+	end_graphics(window);
+
 	return EXIT_SUCCESS;
 }

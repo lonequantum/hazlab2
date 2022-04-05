@@ -17,6 +17,11 @@
 #define MAX_MEM_OBJECTS    50
 
 
+// The game window size
+#define WINDOW_WIDTH     1024
+#define WINDOW_HEIGHT     576
+
+
 // printf to standard error
 #define eprintf(s, ...) fprintf (stderr, (s), __VA_ARGS__)
 
@@ -37,6 +42,10 @@ void    deallocate_all(void);
 // misc.c
 bool    is_positive_integer(const char *);
 int     random_integer(const int);
+
+
+// render.c
+void    draw_scene(void);
 
 
 #endif
