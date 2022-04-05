@@ -1,5 +1,4 @@
 #ifndef NDEBUG
-
 #include <stdio.h>
 #include "hazlab2.h"
 
@@ -12,6 +11,9 @@ void print_matrix(int size, int *lines[])
 		for (int column = 0; column < size; column++)
 			if (line == size / 2 && column == size / 2)
 				printf("><");
+			else if (line % 2 == 0 && column % 2 == 0
+			|| (line == 0 || line == size - 1 || column == 0 || column == size - 1) && lines[line][column] == 0)
+				printf("▒▒");
 			else if (lines[line][column])
 				printf("  ");
 			else
@@ -19,5 +21,6 @@ void print_matrix(int size, int *lines[])
 		putchar('\n');
 	}
 }
+
 
 #endif
