@@ -6,7 +6,7 @@
 
 // Defines a random series of contiguous paths in the given matrix
 // Returns false if the last defined path cannot join a previous series
-static bool make_path(const int size, int *lines[], const int from_i, const int from_j, const int id)
+static bool make_path(const int size, int *const lines[], const int from_i, const int from_j, const int id)
 {
 	lines[from_i][from_j] = id;
 
