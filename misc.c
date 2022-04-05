@@ -6,7 +6,7 @@
 
 
 // Returns whether a string represents a positive integer
-bool is_positive_integer(const char *s)
+bool is_positive_integer(const char *restrict s)
 {
 	while (*s)
 		if (!isdigit(*s++))
