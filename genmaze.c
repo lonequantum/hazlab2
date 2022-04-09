@@ -60,7 +60,7 @@ static bool make_path(const int size, int *const lines[], const int from_i, cons
 
 // Creates a new random square matrix of integers, also refered to as an "array of lines"
 // Walls == 0
-// Paths != 0
+// Paths == 1
 int **generate_matrix(const int size, const bool perfect)
 {
 	int **lines = allocate(size * sizeof(int*));
