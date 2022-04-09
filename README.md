@@ -1,5 +1,5 @@
 # Hazlab2
-A "random maze" game, navigate through it in 3D
+A "2D random maze" game, navigate through it in 3D
 
 This is a rewritten-from-scratch, modified version of [my previous Hazlab project](https://github.com/zareldyn/hazlab).  
 The goal is still to provide an example of simple 3D-graphics application, while being a programming training for me.
