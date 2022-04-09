@@ -32,3 +32,10 @@ void deallocate_all(void)
 	while (n_objects)
 		free(objects[--n_objects]);
 }
+
+
+// Frees the last registered pointer
+void deallocate_last(void)
+{
+	free(objects[--n_objects]);
+}

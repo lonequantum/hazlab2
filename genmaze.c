@@ -1,4 +1,5 @@
 #include <stdbool.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "hazlab2.h"
@@ -118,4 +119,55 @@ int **generate_matrix(const int size, const bool perfect)
 	}
 
 	return lines;
+}
+
+
+// Returns a set of ordered vertices that models the walls of the given maze-matrix
+// It needs to modify, temporarily, the matrix itself
+VERTICES_SET get_vertices(const int size, int *lines[])
+{
+	// Checks the number of needed vertices
+	int n_vertices = 0;
+	for (int i = 0; i < size; i+= 2)
+		for (int j = 0; j < size; j+= 2)
+		{
+			int n = i            ? lines[i - 1][j] : 1;
+			int s = i < size - 1 ? lines[i + 1][j] : 1;
+			int w = j            ? lines[i][j - 1] : 1;
+			int e = j < size - 1 ? lines[i][j + 1] : 1;
+			if (n == w) n_vertices++;
+			if (s == w) n_vertices++;
+			if (n == e) n_vertices++;
+			if (s == e) n_vertices++;
+		}
+#ifndef NDEBUG
+	printf("angles: %d\n", n_vertices);
+#endif
+	n_vertices*= 2; // 2 vertices per angle
+
+	VERTEX *vertices = allocate(n_vertices * sizeof(VERTEX));
+	unsigned int *indices = allocate(2 * n_vertices * sizeof(unsigned int)); // each vertex will be used twice (2 surfaces)
+
+	for (int i = 0; i < size; i+= 2)
+		for (int j = 0; j < size; j+= 2)
+			if (lines[i][j] == 0)
+			// Computes the final vertices for contiguous walls, then marks this part of the maze as already processed
+			{
+				; // TODO
+				flood_fill(size, lines, i, j, 0, -1);
+			}
+
+	// Reverts the matrix to its previous state
+	for (int i = 0; i < size; i++)
+		for (int j = 0; j < size; j++)
+			if (lines[i][j] == -1)
+				lines[i][j] = 0;
+
+	VERTICES_SET ret = {
+		.v_length = n_vertices,
+		.i_length = 2 * n_vertices,
+		.vertices = vertices,
+		.indices = indices
+	};
+	return ret;
 }
