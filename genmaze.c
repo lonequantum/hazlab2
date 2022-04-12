@@ -146,7 +146,8 @@ VERTICES_SET get_vertices(const int size, int *lines[])
 	n_vertices*= 2; // 2 vertices per angle
 
 	VERTEX *vertices = allocate(n_vertices * sizeof(VERTEX));
-	VERTEX *v_ptr = vertices;
+	unsigned int v_index = 0;
+
 	unsigned int *indices = allocate(2 * n_vertices * sizeof(unsigned int)); // each vertex will be used twice (2 surfaces)
 	unsigned int *i_ptr = indices;
 
@@ -163,8 +164,8 @@ VERTICES_SET get_vertices(const int size, int *lines[])
 #ifndef NDEBUG
 					printf("(%f, %f)\n", vtx.x, vtx.z);
 #endif
-					*v_ptr++ = vtx;
-					*v_ptr = vtx; v_ptr->y = 1.0;
+					vertices[v_index++] = vtx;           // stores the vertex (y == 0)
+					vertices[v_index++]; v_ptr->y = 1.0; // stores the corresponding vertex (y == 1)
 
 					switch (direction)
 					{
