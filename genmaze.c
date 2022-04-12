@@ -164,8 +164,9 @@ VERTICES_SET get_vertices(const int size, int *lines[])
 #ifndef NDEBUG
 					printf("(%f, %f)\n", vtx.x, vtx.z);
 #endif
-					vertices[v_index++] = vtx;           // stores the vertex (y == 0)
-					vertices[v_index++]; v_ptr->y = 1.0; // stores the corresponding vertex (y == 1)
+					vertices[v_index++] = vtx;   // stores the vertex (y == 0)
+					vertices[v_index]   = vtx;
+					vertices[v_index++].y = 1.0; // stores the corresponding vertex (y == 1)
 
 					switch (direction)
 					{
