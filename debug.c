@@ -23,4 +23,28 @@ void print_matrix(int size, int *lines[])
 }
 
 
+// Prints the (x,z) coordinates of "key" vertices on stdout
+void print_key_vertices(VERTICES_SET verts)
+{
+	/*GL*/float pv2x = -1.0, pv2z; // previous values
+
+	for (int i = 0; i < verts.i_length; i+= 4)
+	{
+		VERTEX v1 = verts.vertices[verts.indices[i]];
+		VERTEX v2 = verts.vertices[verts.indices[i + 3]];
+
+		if (pv2x != -1.0 && (pv2x != v1.x || pv2z != v1.z))
+			printf("\n\n");
+
+		printf("(%.0f,%.0f -> %.0f,%.0f)", v1.x, v1.z, v2.x, v2.z);
+
+		if (v1.x != v2.x && v1.z != v2.z)
+			printf("algo error: vertices not aligned\n");
+
+		pv2x = v2.x; pv2z = v2.z;
+	}
+	putchar('\n');
+}
+
+
 #endif

@@ -100,8 +100,9 @@ int main(int argc, char *argv[])
 	int **matrix = generate_matrix(size, perfect);
 	if (!matrix)
 		return EXIT_FAILURE;
-	get_vertices(size, matrix);
+	VERTICES_SET verts = get_vertices(size, matrix);
 #ifndef NDEBUG
+	print_key_vertices(verts);
 	print_matrix(size, matrix);
 #endif
 
