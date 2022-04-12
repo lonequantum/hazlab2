@@ -12,7 +12,7 @@ static bool make_path(const int size, int *const lines[], const int from_i, cons
 	lines[from_i][from_j] = id;
 
 	bool directions[4];
-	directions[0] = directions[1] = directions[2] = directions[3] = true; // N, E, S, W
+	directions[NORTH] = directions[EAST] = directions[SOUTH] = directions[WEST] = true;
 	int direction = random_integer(4);
 	int i, j, tries = 0;
 	do
@@ -23,13 +23,13 @@ static bool make_path(const int size, int *const lines[], const int from_i, cons
 		i = from_i, j = from_j;
 		switch (direction)
 		{
-		case 0:
+		case NORTH:
 			i-= 2; break;
-		case 1:
+		case EAST:
 			j+= 2; break;
-		case 2:
+		case SOUTH:
 			i+= 2; break;
-		case 3:
+		case WEST:
 			j-= 2;
 		}
 		if (i == -1 || i == size || j == -1 || j == size || lines[i][j] == id)
@@ -41,13 +41,13 @@ static bool make_path(const int size, int *const lines[], const int from_i, cons
 
 	switch (direction)
 	{
-	case 0:
+	case NORTH:
 		lines[from_i - 1][from_j] = 1; break;
-	case 1:
+	case EAST:
 		lines[from_i][from_j + 1] = 1; break;
-	case 2:
+	case SOUTH:
 		lines[from_i + 1][from_j] = 1; break;
-	case 3:
+	case WEST:
 		lines[from_i][from_j - 1] = 1;
 	}
 
@@ -96,13 +96,13 @@ int **generate_matrix(const int size, const bool perfect)
 	int exit = random_integer(size / 2) * 2 + 1;
 	switch (random_integer(4))
 	{
-	case 0:
+	case NORTH:
 		lines[   0    ][exit] = 1; break;
-	case 1:
+	case EAST:
 		lines[size - 1][exit] = 1; break;
-	case 2:
+	case SOUTH:
 		lines[exit][   0    ] = 1; break;
-	case 3:
+	case WEST:
 		lines[exit][size - 1] = 1;
 	}
 
@@ -168,53 +168,53 @@ VERTICES_SET get_vertices(const int size, int *lines[])
 
 					switch (direction)
 					{
-					case 0: // north
+					case NORTH:
 						while (--u >= 0 && lines[u][v] == 0 && (v == size - 1 || lines[u][v + 1] > 0));
 						vtx.x = v + 1;
 						vtx.z = u + 1;
 						if (u == -1 || lines[u][v])
 						{
-							direction = 3;
+							direction = WEST;
 							u++;
 						}
 						else
-							direction = 1;
+							direction = EAST;
 						break;
-					case 1: // east
+					case EAST:
 						while (++v < size && lines[u][v] == 0 && (u == size - 1 || lines[u + 1][v] > 0));
 						vtx.x = v;
 						vtx.z = u + 1;
 						if (v == size || lines[u][v])
 						{
-							direction = 0;
+							direction = NORTH;
 							v--;
 						}
 						else
-							direction = 2;
+							direction = SOUTH;
 						break;
-					case 2: // south
+					case SOUTH:
 						while (++u < size && lines[u][v] == 0 && (v == 0 || lines[u][v - 1] > 0));
 						vtx.x = v;
 						vtx.z = u;
 						if (u == size || lines[u][v])
 						{
-							direction = 1;
+							direction = EAST;
 							u--;
 						}
 						else
-							direction = 3;
+							direction = WEST;
 						break;
-					case 3: // west
+					case WEST:
 						while (--v >= 0 && lines[u][v] == 0 && (u == 0 || lines[u - 1][v] > 0));
 						vtx.x = v + 1;
 						vtx.z = u;
 						if (v == -1 || lines[u][v])
 						{
-							direction = 2;
+							direction = SOUTH;
 							v++;
 						}
 						else
-							direction = 0;
+							direction = NORTH;
 					}
 				} while (vtx.x != j || vtx.z != i);
 

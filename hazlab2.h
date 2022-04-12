@@ -4,6 +4,9 @@
 #include <stdbool.h>
 
 
+enum {NORTH, EAST, SOUTH, WEST};
+
+
  // All needed vertex attributes
 typedef struct {
 	GLfloat x, y, z;
