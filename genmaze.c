@@ -146,14 +146,79 @@ VERTICES_SET get_vertices(const int size, int *lines[])
 	n_vertices*= 2; // 2 vertices per angle
 
 	VERTEX *vertices = allocate(n_vertices * sizeof(VERTEX));
+	VERTEX *v_ptr = vertices;
 	unsigned int *indices = allocate(2 * n_vertices * sizeof(unsigned int)); // each vertex will be used twice (2 surfaces)
+	unsigned int *i_ptr = indices;
 
+	// Computes the final vertices for contiguous walls
 	for (int i = 0; i < size; i+= 2)
 		for (int j = 0; j < size; j+= 2)
 			if (lines[i][j] == 0)
-			// Computes the final vertices for contiguous walls, then marks this part of the maze as already processed
 			{
-				; // TODO
+				int u = i, v = j;
+				VERTEX vtx = {.x = j, .y = 0.0, .z = i};
+				int direction = 2;
+
+				do {
+#ifndef NDEBUG
+					printf("(%f, %f)\n", vtx.x, vtx.z);
+#endif
+					*v_ptr++ = vtx;
+					*v_ptr = vtx; v_ptr->y = 1.0;
+
+					switch (direction)
+					{
+					case 0: // north
+						while (--u >= 0 && lines[u][v] == 0 && (v == size - 1 || lines[u][v + 1] > 0));
+						vtx.x = v + 1;
+						vtx.z = u + 1;
+						if (u == -1 || lines[u][v])
+						{
+							direction = 3;
+							u++;
+						}
+						else
+							direction = 1;
+						break;
+					case 1: // east
+						while (++v < size && lines[u][v] == 0 && (u == size - 1 || lines[u + 1][v] > 0));
+						vtx.x = v;
+						vtx.z = u + 1;
+						if (v == size || lines[u][v])
+						{
+							direction = 0;
+							v--;
+						}
+						else
+							direction = 2;
+						break;
+					case 2: // south
+						while (++u < size && lines[u][v] == 0 && (v == 0 || lines[u][v - 1] > 0));
+						vtx.x = v;
+						vtx.z = u;
+						if (u == size || lines[u][v])
+						{
+							direction = 1;
+							u--;
+						}
+						else
+							direction = 3;
+						break;
+					case 3: // west
+						while (--v >= 0 && lines[u][v] == 0 && (u == 0 || lines[u - 1][v] > 0));
+						vtx.x = v + 1;
+						vtx.z = u;
+						if (v == -1 || lines[u][v])
+						{
+							direction = 2;
+							v++;
+						}
+						else
+							direction = 0;
+					}
+				} while (vtx.x != j || vtx.z != i);
+
+				// marks this part of the maze as already processed
 				flood_fill(size, lines, i, j, 0, -1);
 			}
 
