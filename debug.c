@@ -34,7 +34,7 @@ void print_key_vertices(VERTICES_SET verts)
 		VERTEX v2 = verts.vertices[verts.indices[i + 3]];
 
 		if (pv2x != -1.0 && (pv2x != v1.x || pv2z != v1.z))
-			printf("\n\n");
+			putchar('\n');
 
 		printf("(%.0f,%.0f -> %.0f,%.0f)", v1.x, v1.z, v2.x, v2.z);
 
