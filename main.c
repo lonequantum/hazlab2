@@ -1,3 +1,4 @@
+#include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <stdbool.h>
 #include <stdio.h>
@@ -33,10 +34,13 @@ static GLFWwindow *start_graphics(void)
 		return NULL;
 	}
 
+	glfwMakeContextCurrent(window);
+
+	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+		return NULL;
+
 	glfwSetWindowSizeLimits(window, WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_WIDTH, WINDOW_HEIGHT);
 	glViewport(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
-
-	glfwMakeContextCurrent(window);
 
 	return window;
 }
@@ -45,6 +49,7 @@ static GLFWwindow *start_graphics(void)
 // Closes the game window and destroys the context
 static void end_graphics(GLFWwindow *const window)
 {
+	delete_GL_data();
 	glfwDestroyWindow(window);
 	glfwTerminate();
 }
@@ -100,9 +105,9 @@ int main(int argc, char *argv[])
 	int **matrix = generate_matrix(size, perfect);
 	if (!matrix)
 		return EXIT_FAILURE;
-	VERTICES_SET verts = get_vertices(size, matrix);
+	VERTICES_SET data = get_vertices(size, matrix);
 #ifndef NDEBUG
-	print_key_vertices(verts);
+	print_key_vertices(data);
 	print_matrix(size, matrix);
 #endif
 
@@ -111,7 +116,11 @@ int main(int argc, char *argv[])
 	if (!window)
 		return EXIT_FAILURE;
 
-	// Runs the main loop
+	// Initializes graphic data
+	if (!prepare_scene(data))
+		return EXIT_FAILURE;
+
+	// Configures and runs the main loop
 	glfwSwapInterval(1);
 	while (!glfwWindowShouldClose(window))
 	{

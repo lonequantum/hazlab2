@@ -74,6 +74,8 @@ void    flood_fill(const int, int *[], const int, const int, const int, const in
 
 // render.c
 void    draw_scene(void);
+bool    prepare_scene(VERTICES_SET);
+void    delete_GL_data(void);
 
 
 #endif
