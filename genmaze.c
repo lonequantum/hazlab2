@@ -127,7 +127,7 @@ int **generate_matrix(const int size, const bool perfect)
 VERTICES_SET get_vertices(const int size, int *lines[])
 {
 	// Checks the number of needed vertices
-	int n_vertices = 0;
+	GLsizei n_vertices = 0;
 	for (int i = 0; i < size; i+= 2)
 		for (int j = 0; j < size; j+= 2)
 		{
@@ -146,9 +146,9 @@ VERTICES_SET get_vertices(const int size, int *lines[])
 	n_vertices*= 2; // 2 vertices per angle
 
 	VERTEX *vertices = allocate(n_vertices * sizeof(VERTEX));
-	unsigned int v_index = 0;
+	GLsizei v_index = 0;
 
-	unsigned int *indices = allocate(3 * n_vertices * sizeof(unsigned int)); // each vertex will be used for 3 triangles
+	GLuint *indices = allocate(3 * n_vertices * sizeof(GLuint)); // each vertex will be used for 3 triangles
 
 	// Computes the final vertices for contiguous walls
 	for (int i = 0; i < size; i+= 2)

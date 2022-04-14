@@ -60,7 +60,7 @@ int main(int argc, char *argv[])
 {
 	atexit(deallocate_all);
 
-	int size = DEFAULT_INPUT_SIZE;
+	unsigned int size = DEFAULT_INPUT_SIZE;
 	bool perfect = false;
 
 	int opt;

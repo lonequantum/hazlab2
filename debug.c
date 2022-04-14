@@ -26,7 +26,7 @@ void print_matrix(int size, int *lines[])
 // Prints the (x,z) coordinates of "key" vertices on stdout
 void print_key_vertices(VERTICES_SET verts)
 {
-	/*GL*/float pv2x = -1.0, pv2z; // previous values
+	float pv2x = -1.0, pv2z; // previous values
 
 	for (int i = 0; i < verts.i_length; i+= 4)
 	{

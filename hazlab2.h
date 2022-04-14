@@ -15,9 +15,9 @@ typedef struct {
 
 // List of ordered vertices
 typedef struct {
-	unsigned int v_length, i_length;
+	GLsizei v_length, i_length;
 	VERTEX *vertices;
-	unsigned int *indices;
+	GLuint *indices;
 } VERTICES_SET;
 
 
