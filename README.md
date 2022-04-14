@@ -10,7 +10,7 @@ Changes from Hazlab:
 - fixed window size (not resizable, no fullscreen)
 - written in C99 instead of C90
 - use of glad/GLFW instead of GLUT
-- better code organization and more conventional coding style
+- more conventional coding style
 - focus on portability across POSIX systems only (no longer Window$-friendly)
 - better algorithms
 
