@@ -123,5 +123,5 @@ void draw_scene(void)
 
 	glUseProgram(shader_program);
 
-	glDrawElements(GL_TRIANGLE, n_elements, GL_UNSIGNED_INT, 0);
+	glDrawElements(GL_TRIANGLES, n_elements, GL_UNSIGNED_INT, 0);
 }
