@@ -28,10 +28,10 @@ void print_key_vertices(VERTICES_SET verts)
 {
 	float pv2x = -1.0, pv2z; // previous values
 
-	for (int i = 0; i < verts.i_length; i+= 4)
+	for (int i = 0; i < verts.i_length; i+= 6)
 	{
 		VERTEX v1 = verts.vertices[verts.indices[i]];
-		VERTEX v2 = verts.vertices[verts.indices[i + 3]];
+		VERTEX v2 = verts.vertices[verts.indices[i + 2]];
 
 		if (pv2x != -1.0 && (pv2x != v1.x || pv2z != v1.z))
 			putchar('\n');

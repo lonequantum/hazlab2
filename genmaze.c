@@ -149,6 +149,7 @@ VERTICES_SET get_vertices(const int size, int *lines[])
 	GLsizei v_index = 0;
 
 	GLuint *indices = allocate(3 * n_vertices * sizeof(GLuint)); // each vertex will be used for 3 triangles
+	GLuint *i_ptr = indices;
 
 	// Computes the final vertices for contiguous walls
 	for (int i = 0; i < size; i+= 2)
@@ -158,10 +159,25 @@ VERTICES_SET get_vertices(const int size, int *lines[])
 				int u = i, v = j;
 				VERTEX vtx = {.x = j, .y = 0.0, .z = i};
 				int direction = 2;
+				GLsizei v_index_begin = v_index;
 
 				do {
+					if (v_index - v_index_begin)
+					{
+						// "closes" the first triangle of the current surface
+						*i_ptr++ = v_index;
+
+						// Defines the second triangle
+						*i_ptr++ = v_index;
+						*i_ptr++ = v_index - 1;
+						*i_ptr++ = v_index + 1;
+					}
+
+					// Starts to define the first triangle
+					*i_ptr++ = v_index;
 					vertices[v_index++] = vtx;   // stores the "key" vertex (y == 0)
-					vertices[v_index]   = vtx;
+					*i_ptr++ = v_index;
+					vertices[v_index] = vtx;
 					vertices[v_index++].y = 1.0; // stores the corresponding vertex (y == 1)
 
 					switch (direction)
@@ -216,6 +232,15 @@ VERTICES_SET get_vertices(const int size, int *lines[])
 					}
 				} while (vtx.x != j || vtx.z != i);
 
+				// "closes" the first triangle of the last surface of the current maze part
+				// (it loops to the first vertex)
+				*i_ptr++ = v_index_begin;
+
+				// Defines the last triangle
+				*i_ptr++ = v_index_begin;
+				*i_ptr++ = v_index - 1;
+				*i_ptr++ = v_index_begin + 1;
+
 				// marks this part of the maze as already processed
 				flood_fill(size, lines, i, j, 0, -1);
 			}
@@ -228,7 +253,7 @@ VERTICES_SET get_vertices(const int size, int *lines[])
 
 	VERTICES_SET ret = {
 		.v_length = n_vertices,
-		.i_length = 2 * n_vertices,
+		.i_length = 3 * n_vertices,
 		.vertices = vertices,
 		.indices = indices
 	};
