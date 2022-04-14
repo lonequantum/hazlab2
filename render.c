@@ -7,8 +7,9 @@
 
 
 // Main GL data
-static GLuint vbo, vao, ebo;
-static GLuint shader_program;
+static GLuint  vbo, vao, ebo;
+static GLuint  shader_program;
+static GLsizei n_elements;
 
 
 // Resets main GL data
@@ -61,6 +62,8 @@ static bool compile_shader(GLuint shader_handle)
 // Creates the data to be sent to the graphic card
 bool prepare_scene(VERTICES_SET data)
 {
+	n_elements = data.i_length;
+
 	// Creates the vertex shader
 	GLuint vertex_shader = glCreateShader(GL_VERTEX_SHADER);
 	glShaderSource(vertex_shader, 1, &vertex_shader_src, NULL);
@@ -120,5 +123,5 @@ void draw_scene(void)
 
 	glUseProgram(shader_program);
 
-	glDrawElements(GL_LINE_LOOP, 4, GL_UNSIGNED_INT, 0);
+	glDrawElements(GL_TRIANGLE, n_elements, GL_UNSIGNED_INT, 0);
 }

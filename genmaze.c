@@ -122,7 +122,7 @@ int **generate_matrix(const int size, const bool perfect)
 }
 
 
-// Returns a set of ordered vertices that models the walls of the given maze-matrix
+// Returns a set of ordered vertices that models the walls of the given maze-matrix (2 triangles per rectangle surface)
 // It needs to modify, temporarily, the matrix itself
 VERTICES_SET get_vertices(const int size, int *lines[])
 {
@@ -148,8 +148,7 @@ VERTICES_SET get_vertices(const int size, int *lines[])
 	VERTEX *vertices = allocate(n_vertices * sizeof(VERTEX));
 	unsigned int v_index = 0;
 
-	unsigned int *indices = allocate(2 * n_vertices * sizeof(unsigned int)); // each vertex will be used twice (2 surfaces)
-	unsigned int *i_ptr = indices;
+	unsigned int *indices = allocate(3 * n_vertices * sizeof(unsigned int)); // each vertex will be used for 3 triangles
 
 	// Computes the final vertices for contiguous walls
 	for (int i = 0; i < size; i+= 2)
@@ -159,19 +158,8 @@ VERTICES_SET get_vertices(const int size, int *lines[])
 				int u = i, v = j;
 				VERTEX vtx = {.x = j, .y = 0.0, .z = i};
 				int direction = 2;
-				unsigned int v_index_begin = v_index;
 
 				do {
-					if (v_index - v_index_begin)
-					{
-						// "Closes" the current surface
-						*i_ptr++ = v_index + 1;
-						*i_ptr++ = v_index;
-					}
-					// Begins a new surface
-					*i_ptr++ = v_index;
-					*i_ptr++ = v_index + 1;
-
 					vertices[v_index++] = vtx;   // stores the "key" vertex (y == 0)
 					vertices[v_index]   = vtx;
 					vertices[v_index++].y = 1.0; // stores the corresponding vertex (y == 1)
@@ -227,10 +215,6 @@ VERTICES_SET get_vertices(const int size, int *lines[])
 							direction = NORTH;
 					}
 				} while (vtx.x != j || vtx.z != i);
-
-				// "Closes" the last surface of the current part
-				*i_ptr++ = v_index_begin + 1;
-				*i_ptr++ = v_index_begin;
 
 				// marks this part of the maze as already processed
 				flood_fill(size, lines, i, j, 0, -1);
