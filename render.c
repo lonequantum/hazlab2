@@ -103,7 +103,7 @@ bool prepare_scene(VERTICES_SET data)
 	glBufferData(GL_ARRAY_BUFFER, data.v_length * sizeof(VERTEX), data.vertices, GL_STATIC_DRAW);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, data.i_length * sizeof(GLuint), data.indices, GL_STATIC_DRAW);
 
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (void*)0);
 	glEnableVertexAttribArray(0);
 	glPolygonMode(GL_BACK, GL_LINE);
 	glPolygonMode(GL_FRONT, GL_FILL);
