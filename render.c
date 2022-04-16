@@ -1,3 +1,4 @@
+#include <cglm/cglm.h>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <stdbool.h>
@@ -25,9 +26,10 @@ void delete_GL_data(void)
 // Source of the vertex shader
 static const GLchar *vertex_shader_src = "#version 330 core\n\
 	layout (location = 0) in vec3 position;\
+	uniform mat4 transform;\
 	void main()\
 	{\
-		gl_Position = vec4(position.x, position.y, position.z, 1.0);\
+		gl_Position = transform * vec4(position.x, position.y, position.z, 1.0);\
 	}";
 
 
@@ -123,7 +125,16 @@ void draw_scene(void)
 	glClearColor(0.1f, 0.1f, 0.3f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT);
 
+	static mat4 transform_matrix = {
+		1, 0, 0, 0,
+		0, 1, 0, 0,
+		0, 0, 1, 0,
+		0, 0, 0, 1
+	};
+
 	glUseProgram(shader_program);
+	GLint transform_location = glGetUniformLocation(shader_program, "transform");
+	glUniformMatrix4fv(transform_location, 1, GL_FALSE, (GLfloat*)transform_matrix);
 
 	glDrawElements(GL_TRIANGLES, n_elements, GL_UNSIGNED_INT, 0);
 }
