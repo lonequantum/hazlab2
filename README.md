@@ -25,3 +25,15 @@ Select Language C/C++, Specification OpenGL, API gl 3.3 (gles1/2/3 None), Profil
 Copy the content of the generated `include` folder to your system (`/usr/local/include/`).
 
 Install (system-wide) [cglm 0.8.5](https://github.com/recp/cglm/tree/v0.8.5#-build).
+
+You can now compile it: `make release`. It produces an executable named "hazlab2" in the project folder.
+
+## Usage
+([docopt notation](http://docopt.org/) is used)
+
+`./hazlab2 [-s<n>] [-p]`
+
+The `-s` option controls the size of the randomly-generated square maze. `n` must be between 1 and 16, the default is 8.  
+A value of 1 is of no interest (just for test/debug purpose).
+
+The `-p` option tells hazlab2 to create a perfect maze (no loops). Otherwise there *may* be loops in it (the smaller the maze is, the highest probability it's perfect, even without `-p`).
