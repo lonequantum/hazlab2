@@ -107,8 +107,9 @@ bool prepare_scene(VERTICES_SET data)
 
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (void*)0);
 	glEnableVertexAttribArray(0);
-	glPolygonMode(GL_BACK, GL_LINE);
-	glPolygonMode(GL_FRONT, GL_FILL);
+	glEnable(GL_CULL_FACE);
+	glCullFace(GL_BACK);
+	glFrontFace(GL_CW);
 
 	// Closes what is no longer needed
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
