@@ -1,5 +1,6 @@
 #ifndef _HAZLAB2_
 #define _HAZLAB2_
+#include <cglm/cglm.h>
 #include <GLFW/glfw3.h>
 #include <stdbool.h>
 
@@ -76,6 +77,11 @@ void    flood_fill(const int, int *[], const int, const int, const int, const in
 void    draw_scene(void);
 bool    prepare_scene(VERTICES_SET);
 void    delete_GL_data(void);
+
+
+// move.c
+mat4   *get_current_transform_matrix(void);
+void    process_input(GLFWwindow *);
 
 
 #endif

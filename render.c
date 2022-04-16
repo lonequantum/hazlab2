@@ -126,12 +126,7 @@ void draw_scene(void)
 	glClearColor(0.1f, 0.1f, 0.3f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	static mat4 transform_matrix = {
-		1, 0, 0, 0,
-		0, 1, 0, 0,
-		0, 0, 1, 0,
-		0, 0, 0, 1
-	};
+	mat4 *transform_matrix = get_current_transform_matrix();
 
 	glUseProgram(shader_program);
 	GLint transform_location = glGetUniformLocation(shader_program, "transform");

@@ -125,8 +125,9 @@ int main(int argc, char *argv[])
 	while (!glfwWindowShouldClose(window))
 	{
 		draw_scene();
-
 		glfwSwapBuffers(window);
+
+		process_input(window);
 		glfwPollEvents();
 	}
 
