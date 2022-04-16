@@ -24,19 +24,19 @@ void delete_GL_data(void)
 
 // Source of the vertex shader
 static const GLchar *vertex_shader_src = "#version 330 core\n\
-	layout (location = 0) in vec3 position;\n\
-	void main()\n\
-	{\n\
-		gl_Position = vec4(position.x, position.y, position.z, 1.0);\n\
+	layout (location = 0) in vec3 position;\
+	void main()\
+	{\
+		gl_Position = vec4(position.x, position.y, position.z, 1.0);\
 	}";
 
 
 // Source of the fragment shader
 static const GLchar *fragment_shader_src = "#version 330 core\n\
-	out vec4 color;\n\
-	void main()\n\
-	{\n\
-		color = vec4(0.5f, 0.5f, 0.5f, 1.0f);\n\
+	out vec4 color;\
+	void main()\
+	{\
+		color = vec4(0.5f, 0.5f, 0.5f, 1.0f);\
 	}";
 
 
