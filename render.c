@@ -3,6 +3,7 @@
 #include <GLFW/glfw3.h>
 #include <stdbool.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include "hazlab2.h"
 #define ERROR_MSG_MAX_LEN 512
 

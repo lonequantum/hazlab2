@@ -1,4 +1,5 @@
 #include <cglm/cglm.h>
+#include <GLFW/glfw3.h>
 #include "hazlab2.h"
 
 
