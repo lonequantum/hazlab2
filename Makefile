@@ -1,9 +1,13 @@
-hazlab2: clean
-	c99 -o hazlab2 *.c -D_POSIX_C_SOURCE=200809L -lm -ldl -lglfw -lGL
+NAME = hazlab2
+LIBS = -lm -ldl -lglfw -lGL
+OTHER_FLAGS = -D_POSIX_C_SOURCE=200809L
+
+$(NAME): clean
+	c99 -o $(NAME) *.c $(OTHER_FLAGS) $(LIBS)
 
 release:
-	c99 -o hazlab2 -O3 *.c -DNDEBUG -D_POSIX_C_SOURCE=200809L -lm -ldl -lglfw -lGL
-	strip hazlab2
+	c99 -o $(NAME) *.c -O3 -DNDEBUG $(OTHER_FLAGS) $(LIBS)
+	strip $(NAME)
 
 clean:
-	rm -f hazlab2
+	rm -f $(NAME)
