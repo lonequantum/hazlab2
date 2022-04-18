@@ -106,7 +106,7 @@ bool prepare_scene(VERTICES_SET data)
 	glBufferData(GL_ARRAY_BUFFER, data.v_length * sizeof(VERTEX), data.vertices, GL_STATIC_DRAW);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, data.i_length * sizeof(GLuint), data.indices, GL_STATIC_DRAW);
 
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (void*)0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (void *)0);
 	glEnableVertexAttribArray(0);
 	glEnable(GL_CULL_FACE);
 	glCullFace(GL_BACK);
@@ -131,7 +131,7 @@ void draw_scene(void)
 
 	glUseProgram(shader_program);
 	GLint transform_location = glGetUniformLocation(shader_program, "transform");
-	glUniformMatrix4fv(transform_location, 1, GL_FALSE, (GLfloat*)transform_matrix);
+	glUniformMatrix4fv(transform_location, 1, GL_FALSE, (GLfloat *)transform_matrix);
 
 	glDrawElements(GL_TRIANGLES, n_elements, GL_UNSIGNED_INT, 0);
 }
