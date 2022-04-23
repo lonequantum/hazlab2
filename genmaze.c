@@ -158,7 +158,7 @@ VERTICES_SET get_vertices(const int size, int *lines[])
 			if (lines[i][j] == 0)
 			{
 				int u = i, v = j;
-				VERTEX vtx = {.x = j, .y = 0.0, .z = i};
+				VERTEX vtx = {.x = j, .y = -0.5f, .z = i};
 				int direction = 2;
 				GLsizei v_index_begin = v_index;
 
@@ -174,12 +174,16 @@ VERTICES_SET get_vertices(const int size, int *lines[])
 						*i_ptr++ = v_index + 1;
 					}
 
+					// Makes (x, z)==(0, 0) the center of the maze
+					vtx.x-= size / 2.0f;
+					vtx.z-= size / 2.0f;
+
 					// Starts to define the first triangle
 					*i_ptr++ = v_index;
-					vertices[v_index++] = vtx;   // stores the "key" vertex (y == 0)
+					vertices[v_index++] = vtx;    // stores the "key" vertex (y == -0.5)
 					*i_ptr++ = v_index;
 					vertices[v_index] = vtx;
-					vertices[v_index++].y = 1.0; // stores the corresponding vertex (y == 1)
+					vertices[v_index++].y = 0.5f; // stores the corresponding vertex (y == 0.5)
 
 					switch (direction)
 					{
