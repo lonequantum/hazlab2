@@ -8,10 +8,16 @@
 enum {NORTH, EAST, SOUTH, WEST};
 
 
- // All needed vertex attributes
+// All needed vertex attributes
 typedef struct {
 	GLfloat x, y, z;
 } VERTEX;
+
+
+// 3D vector
+typedef struct {
+	GLfloat x, y, z;
+} VECTOR3;
 
 
 // List of ordered vertices
