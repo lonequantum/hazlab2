@@ -48,6 +48,12 @@ typedef struct {
 #define MAX_MEM_OBJECTS    50
 
 
+// Clipping and projection values
+#define CLIP_MIN         0.0f
+#define CLIP_MAX (float)(MAX_INPUT_SIZE * 4 - 1)
+#define FOV_ANGLE_RAD    0.8f
+
+
 // The game window size
 #define WINDOW_WIDTH     1024
 #define WINDOW_HEIGHT     576

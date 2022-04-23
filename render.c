@@ -11,7 +11,10 @@
 // Main GL data
 static GLuint  vbo, vao, ebo;
 static GLuint  shader_program;
+
+
 static GLsizei n_elements;
+static mat4    projection_matrix;
 
 
 // Resets main GL data
@@ -28,9 +31,10 @@ void delete_GL_data(void)
 static const GLchar *vertex_shader_src = "#version 330 core\n\
 	layout (location = 0) in vec3 position;\
 	uniform mat4 transform;\
+	uniform mat4 projection;\
 	void main()\
 	{\
-		gl_Position = transform * vec4(position.x, position.y, position.z, 1.0);\
+		gl_Position = projection * transform * vec4(position.x, position.y, position.z, 1.0);\
 	}";
 
 
@@ -117,6 +121,9 @@ bool prepare_scene(VERTICES_SET data)
 	glDeleteShader(vertex_shader);
 	glDeleteShader(fragment_shader);
 
+	// defines the fixed projection matrix
+	glm_perspective(FOV_ANGLE_RAD, (float)WINDOW_WIDTH / WINDOW_HEIGHT, CLIP_MIN, CLIP_MAX, projection_matrix);
+
 	return true;
 }
 
@@ -132,6 +139,8 @@ void draw_scene(void)
 	glUseProgram(shader_program);
 	GLint transform_location = glGetUniformLocation(shader_program, "transform");
 	glUniformMatrix4fv(transform_location, 1, GL_FALSE, (GLfloat *)transform_matrix);
+	GLint projection_location = glGetUniformLocation(shader_program, "projection");
+	glUniformMatrix4fv(projection_location, 1, GL_FALSE, (GLfloat *)projection_matrix);
 
 	glDrawElements(GL_TRIANGLES, n_elements, GL_UNSIGNED_INT, 0);
 }
