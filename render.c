@@ -124,6 +124,9 @@ bool prepare_scene(VERTICES_SET data)
 	// defines the fixed projection matrix
 	glm_perspective(FOV_ANGLE_RAD, (float)WINDOW_WIDTH / WINDOW_HEIGHT, CLIP_MIN, CLIP_MAX, projection_matrix);
 
+#ifndef NDEBUG
+	prepare_scene_debug_adds();
+#endif
 	return true;
 }
 

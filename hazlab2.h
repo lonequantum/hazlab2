@@ -71,6 +71,7 @@ VERTICES_SET get_vertices(const int, int *[]);
 // debug.c
 void    print_matrix(int, int *[]);
 void    print_key_vertices(VERTICES_SET);
+void    prepare_scene_debug_adds(void);
 
 
 // memory.c
