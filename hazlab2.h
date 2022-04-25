@@ -59,6 +59,11 @@ typedef struct {
 #define WINDOW_HEIGHT     576
 
 
+// Defines the speed of movements
+#define DELTA_ROTATION            0.05f
+#define DELTA_TRANSLATION_DIVISOR 10
+
+
 // printf to standard error
 #define eprintf(s, ...) fprintf (stderr, (s), __VA_ARGS__)
 
