@@ -9,7 +9,7 @@ Changes from Hazlab:
 - the command line also permits to make a no-loop ("perfect") maze, by default a non-perfect maze is generated
 - fixed window size (not resizable, no fullscreen)
 - written in C99 instead of C90
-- use of cglm/glad/GLFW instead of GLUT
+- use of GLFW instead of GLUT
 - more conventional coding style
 - focus on portability across POSIX systems only (no longer Window$-friendly)
 - better algorithms
