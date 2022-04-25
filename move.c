@@ -6,17 +6,17 @@
 
 
 // the reference UP vector
-static vec3 up_axis = {0.0f, 1.0f, 0.0f};
+static vec3 up_axis = {(GLfloat)0.0, (GLfloat)1.0, (GLfloat)0.0};
 
 
 // The user's state
-static VECTOR3 user_position = {.x = 0.0f, .y = 0.0f, .z = 0.0f};
-static float   user_angle    = 0.0f;
+static VECTOR3 user_position = {.x = (GLfloat)0.0, .y = (GLfloat)0.0, .z = (GLfloat)0.0};
+static float   user_angle    = (GLfloat)0.0;
 static mat4 current_transform_matrix = {
-	1.0f, 0.0f, 0.0f, 0.0f, // starts with the identity matrix
-	0.0f, 1.0f, 0.0f, 0.0f,
-	0.0f, 0.0f, 1.0f, 0.0f,
-	0.0f, 0.0f, 0.0f, 1.0f
+	(GLfloat)1.0, (GLfloat)0.0, (GLfloat)0.0, (GLfloat)0.0, // starts with the identity matrix
+	(GLfloat)0.0, (GLfloat)1.0, (GLfloat)0.0, (GLfloat)0.0,
+	(GLfloat)0.0, (GLfloat)0.0, (GLfloat)1.0, (GLfloat)0.0,
+	(GLfloat)0.0, (GLfloat)0.0, (GLfloat)0.0, (GLfloat)1.0
 };
 mat4 *get_current_transform_matrix(void)
 {
@@ -51,8 +51,8 @@ void process_input(GLFWwindow *window)
 	}
 
 	glm_look(
-		(vec3){user_position.x, 0.0f, user_position.z},
-		(vec3){delta_x, 0.0f, delta_z},
+		(vec3){user_position.x, (GLfloat)0.0, user_position.z},
+		(vec3){delta_x, (GLfloat)0.0, delta_z},
 		up_axis,
 		current_transform_matrix
 	);

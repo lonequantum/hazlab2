@@ -134,7 +134,7 @@ bool prepare_scene(VERTICES_SET data)
 // Draws the whole scene
 void draw_scene(void)
 {
-	glClearColor(0.1f, 0.1f, 0.3f, 1.0f);
+	glClearColor((GLfloat)0.1, (GLfloat)0.1, (GLfloat)0.3, (GLfloat)1.0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	mat4 *transform_matrix = get_current_transform_matrix();

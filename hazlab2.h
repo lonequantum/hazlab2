@@ -49,9 +49,9 @@ typedef struct {
 
 
 // Clipping and projection values
-#define CLIP_MIN         0.0f
+#define CLIP_MIN           (GLfloat)0.0
 #define CLIP_MAX (float)(MAX_INPUT_SIZE * 4 - 1)
-#define FOV_ANGLE_RAD    0.8f
+#define FOV_ANGLE_RAD      (GLfloat)0.8
 
 
 // The game window size
@@ -60,7 +60,7 @@ typedef struct {
 
 
 // Defines the speed of movements
-#define DELTA_ROTATION            0.05f
+#define DELTA_ROTATION            (GLfloat)0.05
 #define DELTA_TRANSLATION_DIVISOR 10
 
 
