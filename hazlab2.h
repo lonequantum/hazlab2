@@ -60,7 +60,7 @@ typedef struct {
 
 
 // Defines the speed of movements
-#define DELTA_ROTATION            (GLfloat)0.05
+#define DELTA_ROTATION            (GLfloat)0.075
 #define DELTA_TRANSLATION_DIVISOR 10
 
 
