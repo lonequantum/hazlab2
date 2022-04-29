@@ -14,12 +14,6 @@ typedef struct {
 } VERTEX;
 
 
-// 3D vector
-typedef struct {
-	GLfloat x, y, z;
-} VECTOR3;
-
-
 // List of ordered vertices
 typedef struct {
 	GLsizei v_length, i_length;
