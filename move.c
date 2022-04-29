@@ -13,10 +13,10 @@ static vec3 up_axis = {(GLfloat)0.0, (GLfloat)1.0, (GLfloat)0.0};
 static vec3  user_position = {(GLfloat)0.0, (GLfloat)0.0, (GLfloat)0.0};
 static float user_angle    = (GLfloat)0.0;
 static mat4 current_transform_matrix = {
-	(GLfloat)1.0, (GLfloat)0.0, (GLfloat)0.0, (GLfloat)0.0, // starts with the identity matrix
-	(GLfloat)0.0, (GLfloat)1.0, (GLfloat)0.0, (GLfloat)0.0,
-	(GLfloat)0.0, (GLfloat)0.0, (GLfloat)1.0, (GLfloat)0.0,
-	(GLfloat)0.0, (GLfloat)0.0, (GLfloat)0.0, (GLfloat)1.0
+	{(GLfloat)1.0, (GLfloat)0.0, (GLfloat)0.0, (GLfloat)0.0}, // starts with the identity matrix
+	{(GLfloat)0.0, (GLfloat)1.0, (GLfloat)0.0, (GLfloat)0.0},
+	{(GLfloat)0.0, (GLfloat)0.0, (GLfloat)1.0, (GLfloat)0.0},
+	{(GLfloat)0.0, (GLfloat)0.0, (GLfloat)0.0, (GLfloat)1.0}
 };
 mat4 *get_current_transform_matrix(void)
 {
