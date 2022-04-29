@@ -59,7 +59,7 @@ typedef struct {
 
 
 // printf to standard error
-#define eprintf(s, ...) fprintf (stderr, (s), __VA_ARGS__)
+#define eprintf(s, ...) fprintf(stderr, (s), __VA_ARGS__)
 
 
 // genmaze.c
