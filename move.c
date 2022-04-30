@@ -10,9 +10,9 @@ static vec3 up_axis = {(GLfloat)0.0, (GLfloat)1.0, (GLfloat)0.0};
 
 
 // The user's state
-static vec3  user_position = {(GLfloat)0.0, (GLfloat)0.0, (GLfloat)0.0};
-static float user_angle    = (GLfloat)0.0;
-static mat4 current_transform_matrix = {
+static vec3   user_position = {(GLfloat)0.0, (GLfloat)0.0, (GLfloat)0.0};
+static double user_angle    = 0.0;
+static mat4   current_transform_matrix = {
 	{(GLfloat)1.0, (GLfloat)0.0, (GLfloat)0.0, (GLfloat)0.0}, // starts with the identity matrix
 	{(GLfloat)0.0, (GLfloat)1.0, (GLfloat)0.0, (GLfloat)0.0},
 	{(GLfloat)0.0, (GLfloat)0.0, (GLfloat)1.0, (GLfloat)0.0},
@@ -36,8 +36,8 @@ void process_input(GLFWwindow *window)
 		user_angle+= DELTA_ROTATION;
 	}
 
-	float delta_x = cos(user_angle) / DELTA_TRANSLATION_DIVISOR;
-	float delta_z = sin(user_angle) / DELTA_TRANSLATION_DIVISOR;
+	GLfloat delta_x = cos(user_angle) / DELTA_TRANSLATION_DIVISOR;
+	GLfloat delta_z = sin(user_angle) / DELTA_TRANSLATION_DIVISOR;
 
 	if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
 	{
