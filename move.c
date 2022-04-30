@@ -24,6 +24,10 @@ mat4 *get_current_transform_matrix(void)
 }
 
 
+#define user_x user_position[0]
+#define user_z user_position[2]
+
+
 #define J(x) (int)((x) + size / 2.0)
 #define I(z) (int)((z) + size / 2.0)
 
@@ -41,17 +45,17 @@ void process_input(GLFWwindow *window, const int size, const int *maze_lines[])
 
 	if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
 	{
-		if (maze_lines[ I(user_position[2] + delta_z) ][ J(user_position[0]) ])
-			user_position[2]+= delta_z;
-		if (maze_lines[ I(user_position[2]) ][ J(user_position[0] + delta_x) ])
-			user_position[0]+= delta_x;
+		if (maze_lines[I(user_z + delta_z)][J(user_x)])
+			user_z+= delta_z;
+		if (maze_lines[I(user_z)][J(user_x + delta_x)])
+			user_x+= delta_x;
 	}
 	else if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
 	{
-		if (maze_lines[ I(user_position[2] - delta_z) ][ J(user_position[0]) ])
-			user_position[2]-= delta_z;
-		if (maze_lines[ I(user_position[2]) ][ J(user_position[0] - delta_x) ])
-			user_position[0]-= delta_x;
+		if (maze_lines[I(user_z - delta_z)][J(user_x)])
+			user_z-= delta_z;
+		if (maze_lines[I(user_z)][J(user_x - delta_x)])
+			user_x-= delta_x;
 	}
 
 	glm_look(
