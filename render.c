@@ -48,7 +48,7 @@ static const GLchar *fragment_shader_src = "#version 330 core\n\
 
 
 // Compiles the given shader and checks the compilation status
-static bool compile_shader(GLuint shader_handle)
+static bool compile_shader(const GLuint shader_handle)
 {
 	glCompileShader(shader_handle);
 
@@ -67,7 +67,7 @@ static bool compile_shader(GLuint shader_handle)
 
 
 // Creates the data to be sent to the graphic card
-bool prepare_scene(VERTICES_SET data)
+bool prepare_scene(const VERTICES_SET data)
 {
 	n_elements = data.i_length;
 

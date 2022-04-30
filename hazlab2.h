@@ -87,13 +87,13 @@ void    flood_fill(const int, int *[], const int, const int, const int, const in
 
 // render.c
 void    draw_scene(void);
-bool    prepare_scene(VERTICES_SET);
+bool    prepare_scene(const VERTICES_SET);
 void    delete_GL_data(void);
 
 
 // move.c
 mat4   *get_current_transform_matrix(void);
-void    process_input(GLFWwindow *, const int, const int *[]);
+void    process_input(GLFWwindow *, const int, const int *const []);
 
 
 #endif
