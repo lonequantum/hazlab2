@@ -1,6 +1,6 @@
 NAME = hazlab2
 LIBS = -lm -ldl -lglfw -lGL
-OTHER_FLAGS = -D_POSIX_C_SOURCE=200809L -Wall
+OTHER_FLAGS = -D_POSIX_C_SOURCE=200809L
 
 $(NAME): clean
 	c99 -o $(NAME) *.c $(OTHER_FLAGS) $(LIBS)
