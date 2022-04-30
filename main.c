@@ -127,7 +127,7 @@ int main(int argc, char *argv[])
 		draw_scene();
 		glfwSwapBuffers(window);
 
-		process_input(window);
+		process_input(window, size, (const int **)matrix);
 		glfwPollEvents();
 	}
 

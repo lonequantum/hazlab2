@@ -24,8 +24,12 @@ mat4 *get_current_transform_matrix(void)
 }
 
 
+#define J(x) (int)((x) + size / 2.0)
+#define I(z) (int)((z) + size / 2.0)
+
+
 // Maps keys to actions
-void process_input(GLFWwindow *window)
+void process_input(GLFWwindow *window, const int size, const int *maze_lines[])
 {
 	if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS)
 	{
@@ -41,13 +45,17 @@ void process_input(GLFWwindow *window)
 
 	if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
 	{
-		user_position[0]+= delta_x;
-		user_position[2]+= delta_z;
+		if (maze_lines[ I(user_position[2] + delta_z) ][ J(user_position[0]) ])
+			user_position[2]+= delta_z;
+		if (maze_lines[ I(user_position[2]) ][ J(user_position[0] + delta_x) ])
+			user_position[0]+= delta_x;
 	}
 	else if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
 	{
-		user_position[0]-= delta_x;
-		user_position[2]-= delta_z;
+		if (maze_lines[ I(user_position[2] - delta_z) ][ J(user_position[0]) ])
+			user_position[2]-= delta_z;
+		if (maze_lines[ I(user_position[2]) ][ J(user_position[0] - delta_x) ])
+			user_position[0]-= delta_x;
 	}
 
 	glm_look(

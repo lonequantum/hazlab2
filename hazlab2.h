@@ -93,7 +93,7 @@ void    delete_GL_data(void);
 
 // move.c
 mat4   *get_current_transform_matrix(void);
-void    process_input(GLFWwindow *);
+void    process_input(GLFWwindow *, const int, const int *[]);
 
 
 #endif
