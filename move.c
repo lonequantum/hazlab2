@@ -32,13 +32,9 @@ mat4 *get_current_transform_matrix(void)
 void process_input(GLFWwindow *window, const int size, const int *maze_lines[])
 {
 	if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS)
-	{
 		user_angle-= DELTA_ROTATION;
-	}
 	else if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS)
-	{
 		user_angle+= DELTA_ROTATION;
-	}
 
 	GLfloat delta_x = cos(user_angle) / DELTA_TRANSLATION_DIVISOR;
 	GLfloat delta_z = sin(user_angle) / DELTA_TRANSLATION_DIVISOR;
