@@ -28,8 +28,8 @@ mat4 *get_current_transform_matrix(void)
 #define user_z user_position[2]
 
 
-#define J(x) (int)((x) + size / 2.0)
-#define I(z) (int)((z) + size / 2.0)
+#define J(x) (int)((x) + size / (GLfloat)2.0)
+#define I(z) (int)((z) + size / (GLfloat)2.0)
 
 
 // Maps keys to actions
