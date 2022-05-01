@@ -58,6 +58,9 @@ typedef struct {
 #define DELTA_TRANSLATION_DIVISOR 10.0
 
 
+#define BACKGROUND_COLOR (GLfloat)0.1, (GLfloat)0.1, (GLfloat)0.2, (GLfloat)1.0
+
+
 // printf to standard error
 #define eprintf(s, ...) fprintf(stderr, (s), __VA_ARGS__)
 
