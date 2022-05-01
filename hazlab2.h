@@ -58,6 +58,8 @@ typedef struct {
 #define DELTA_TRANSLATION_DIVISOR 10.0
 
 
+// Rendering values
+// See also shader-hardcoded values in render.c
 #define BACKGROUND_COLOR (GLfloat)0.1, (GLfloat)0.1, (GLfloat)0.2, (GLfloat)1.0
 
 

@@ -43,7 +43,7 @@ static const GLchar *fragment_shader_src = "#version 330 core\n\
 	out vec4 color;\
 	void main()\
 	{\
-		color = vec4(0.5f, 0.5f, 0.5f, 1.0f);\
+		color = vec4(0.1f, 0.2f, 0.4f, 1.0f);\
 	}";
 
 
