@@ -159,7 +159,7 @@ VERTICES_SET get_vertices(const int size, int *lines[])
 			{
 				int u = i, v = j;
 				VERTEX vtx = {.x = (GLfloat)j, .y = (GLfloat)-0.5, .z = (GLfloat)i};
-				int direction = 2;
+				int direction = SOUTH;
 				GLsizei v_index_begin = v_index;
 
 				do {
