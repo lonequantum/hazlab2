@@ -35,6 +35,11 @@ mat4 *get_current_transform_matrix(void)
 // Maps keys to actions
 void process_input(GLFWwindow *const window, const int size, const int *const maze_lines[])
 {
+	int i = I(user_z);
+	int j = J(user_x);
+	if (i == 0 || j == 0 || i == size - 1 || j == size - 1)
+		glfwSetWindowShouldClose(window, true);
+
 	if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS)
 		user_angle-= DELTA_ROTATION;
 	else if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS)
