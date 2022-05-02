@@ -32,9 +32,11 @@ You can now compile it: `make release`. It produces an executable named "hazlab2
 ## Usage
 ([docopt notation](http://docopt.org/) is used)
 
-`./hazlab2 [-s<n>] [-p]`
+`./hazlab2 [-s<n>] [-p] [-a<n>]`
 
 The `-s` option controls the size of the randomly-generated square maze. `n` must be between 1 and 16, the default is 8.  
 A value of 1 is of no interest (just for test/debug purpose).
 
 The `-p` option tells hazlab2 to create a perfect maze (no loops). Otherwise there *may* be loops in it (the smaller the maze is, the highest probability it's perfect, even without `-p`).
+
+The `-a` option controls MSAA (`n` samples). The default is 2, the max is 8. Set it to 0 to disable AA.
