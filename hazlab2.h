@@ -34,6 +34,11 @@ typedef struct {
 #define DEFAULT_INPUT_SIZE  8
 
 
+// Command line defined MSAA
+#define DEFAULT_AA_SAMPLES  2
+#define MAX_AA_SAMPLES      8
+
+
 // if x is the width of the maze (the matrix), divide x * x by this number to obtain the number of paths to add in case of non-perfect maze
 #define NON_PERFECT_RATIO  49
 

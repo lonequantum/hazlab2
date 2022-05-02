@@ -16,7 +16,7 @@ void on_glfw_error(int error, const char *description)
 
 
 // Initializes the context and creates the game window
-static GLFWwindow *start_graphics(void)
+static GLFWwindow *start_graphics(unsigned int antialias_samples)
 {
 	if (!glfwInit())
 		return NULL;
@@ -24,6 +24,9 @@ static GLFWwindow *start_graphics(void)
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
+	glfwWindowHint(GLFW_SAMPLES, antialias_samples);
+	/*glEnable(GL_MULTISAMPLE);*/
 
 	glfwSetErrorCallback(on_glfw_error);
 
@@ -61,10 +64,11 @@ int main(int argc, char *argv[])
 	atexit(deallocate_all);
 
 	unsigned int size = DEFAULT_INPUT_SIZE;
+	unsigned int antialias_samples = DEFAULT_AA_SAMPLES;
 	bool perfect = false;
 
 	int opt;
-	while ((opt = getopt(argc, argv, ":ps:")) != -1)
+	while ((opt = getopt(argc, argv, ":ps:a:")) != -1)
 	{
 		switch (opt)
 		{
@@ -84,6 +88,22 @@ int main(int argc, char *argv[])
 				return EX_USAGE;
 			}
 			break;
+
+		case 'a':
+			if (is_positive_integer(optarg))
+			{
+				antialias_samples = atoi(optarg);
+				if (antialias_samples > MAX_AA_SAMPLES)
+				{
+					eprintf("antialiasing samples operand (option -a) must be <= %d\n", MAX_AA_SAMPLES);
+					return EX_USAGE;
+				}
+			}
+			else
+			{
+				eprintf("option -a (antialiasing samples) requires a positive integer operand\n", NULL);
+				return EX_USAGE;
+			}
 
 		case 'p':
 			perfect = true;
@@ -112,7 +132,7 @@ int main(int argc, char *argv[])
 #endif
 
 	// Creates the window
-	GLFWwindow *window = start_graphics();
+	GLFWwindow *window = start_graphics(antialias_samples);
 	if (!window)
 		return EXIT_FAILURE;
 

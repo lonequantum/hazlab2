@@ -13,6 +13,7 @@ Changes from Hazlab:
 - more conventional coding style
 - focus on portability across POSIX systems only (no longer Window$-friendly)
 - better algorithms
+- MSAA
 
 THIS IS STILL A WORK IN PROGRESS
 
