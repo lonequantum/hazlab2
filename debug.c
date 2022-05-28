@@ -47,7 +47,7 @@ void print_key_vertices(VERTICES_SET verts)
 }
 
 
-// Additionnal instructions for rendering
+// Additional instructions for rendering
 void prepare_scene_debug_adds(void)
 {
 	/*glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);*/
