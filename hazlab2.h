@@ -50,7 +50,7 @@ typedef struct {
 // Clipping and projection values
 #define CLIP_MIN           (GLfloat)0.0
 #define CLIP_MAX (float)(MAX_INPUT_SIZE * 4 - 1)
-#define FOV_ANGLE_RAD      (GLfloat)1.2
+#define FOV_ANGLE_RAD      (GLfloat)1.0
 
 
 // The game window size
