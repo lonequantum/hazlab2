@@ -127,7 +127,7 @@ int main(int argc, char *argv[])
 		return EXIT_FAILURE;
 	VERTICES_SET data = get_vertices(size, matrix);
 #ifndef NDEBUG
-	print_key_vertices(data);
+	//print_key_vertices(data);
 	print_matrix(size, matrix);
 #endif
 
