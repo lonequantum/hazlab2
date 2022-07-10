@@ -69,7 +69,7 @@ typedef struct {
 
 // The way the user looks at the environment
 #define LOOK_AT_DELTA_Y (GLfloat)-0.025
-#define USER_Y          (GLfloat)0.2
+#define USER_Y          (GLfloat)0.15
 
 
 // Rendering values
