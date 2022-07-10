@@ -26,17 +26,14 @@ mat4 *get_current_transform_matrix(void)
 
 #define user_x user_position[0]
 #define user_z user_position[2]
-
-
-#define J(x) (int)((x) + size / (GLfloat)2.0)
-#define I(z) (int)((z) + size / (GLfloat)2.0)
+#define K(x) (int)((x) + size / (GLfloat)2.0)
 
 
 // Maps keys to actions
 void process_input(GLFWwindow *const window, const int size, const int *const maze_lines[])
 {
-	int i = I(user_z);
-	int j = J(user_x);
+	int i = K(user_z);
+	int j = K(user_x);
 	if (i == 0 || j == 0 || i == size - 1 || j == size - 1)
 		glfwSetWindowShouldClose(window, true);
 
@@ -50,17 +47,25 @@ void process_input(GLFWwindow *const window, const int size, const int *const ma
 
 	if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
 	{
-		if (maze_lines[I(user_z + delta_z)][J(user_x)])
-			user_z+= delta_z;
-		if (maze_lines[I(user_z)][J(user_x + delta_x)])
-			user_x+= delta_x;
+		GLfloat new_x = user_x + delta_x;
+		GLfloat new_z = user_z + delta_z;
+
+		if (maze_lines[K(new_z)][j])
+			user_z = new_z;
+
+		if (maze_lines[i][K(new_x)])
+			user_x = new_x;
 	}
 	else if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
 	{
-		if (maze_lines[I(user_z - delta_z)][J(user_x)])
-			user_z-= delta_z;
-		if (maze_lines[I(user_z)][J(user_x - delta_x)])
-			user_x-= delta_x;
+		GLfloat new_x = user_x - delta_x;
+		GLfloat new_z = user_z - delta_z;
+
+		if (maze_lines[K(new_z)][j])
+			user_z = new_z;
+
+		if (maze_lines[i][K(new_x)])
+			user_x = new_x;
 	}
 
 	glm_look(
