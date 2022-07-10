@@ -9,9 +9,9 @@
 static vec3 up_axis = {(GLfloat)0.0, (GLfloat)1.0, (GLfloat)0.0};
 
 
-// The user's state
-static vec3   user_position = {(GLfloat)0.0, (GLfloat)0.0, (GLfloat)0.0};
-static double user_angle    = 0.0;
+// The camera/user's state
+static vec3   user_position = {(GLfloat)0.0, USER_Y, (GLfloat)0.0};
+static double user_angle    = DELTA_ROTATION * 4;
 static mat4   current_transform_matrix = {
 	{(GLfloat)1.0, (GLfloat)0.0, (GLfloat)0.0, (GLfloat)0.0}, // starts with the identity matrix
 	{(GLfloat)0.0, (GLfloat)1.0, (GLfloat)0.0, (GLfloat)0.0},
@@ -70,7 +70,7 @@ void process_input(GLFWwindow *const window, const int size, const int *const ma
 
 	glm_look(
 		user_position,
-		(vec3){delta_x, (GLfloat)0.0, delta_z},
+		(vec3){delta_x, LOOK_AT_DELTA_Y, delta_z},
 		up_axis,
 		current_transform_matrix
 	);

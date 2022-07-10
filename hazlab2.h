@@ -48,13 +48,13 @@ typedef struct {
 
 
 // see genmaze.c
-#define WALLS_THICKNESS_REDUCTOR (GLfloat)0.1
+#define WALLS_THICKNESS_REDUCTOR (GLfloat)0.25
 
 
 // Clipping and projection values
-#define CLIP_MIN           (GLfloat)0.0
+#define CLIP_MIN          0.0f
 #define CLIP_MAX (float)(MAX_INPUT_SIZE * 4 - 1)
-#define FOV_ANGLE_RAD      (GLfloat)1.0
+#define FOV_ANGLE_RAD     1.0f
 
 
 // The game window size
@@ -62,9 +62,14 @@ typedef struct {
 #define WINDOW_HEIGHT     576
 
 
-// Defines the speed of movements
+// The speed of movements
 #define DELTA_ROTATION            0.075
 #define DELTA_TRANSLATION_DIVISOR 10.0
+
+
+// The way the user looks at the environment
+#define LOOK_AT_DELTA_Y (GLfloat)-0.025
+#define USER_Y          (GLfloat)0.2
 
 
 // Rendering values
