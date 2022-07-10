@@ -104,6 +104,7 @@ int main(int argc, char *argv[])
 				eprintf("option -a (antialiasing samples) requires a positive integer operand\n", NULL);
 				return EX_USAGE;
 			}
+			break;
 
 		case 'p':
 			perfect = true;
