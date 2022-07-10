@@ -7,6 +7,7 @@ The goal is still to provide an example of simple 3D-graphics application, while
 Changes from Hazlab:
 - command line for choosing the size (rather than a graphical menu)
 - the command line also permits to make a no-loop ("perfect") maze, by default a non-perfect maze is generated
+- no textures
 - fixed window size (not resizable, no fullscreen)
 - written in C99 instead of C90
 - use of GLFW instead of GLUT
@@ -15,7 +16,11 @@ Changes from Hazlab:
 - better algorithms
 - MSAA
 
-THIS IS STILL A WORK IN PROGRESS
+THIS IS STILL A WORK IN PROGRESS  
+TODOS:
+- sky / ground?
+- lighting
+- nice ending when the exit is reached (instead of brutal program quit)
 
 ## Build
 
