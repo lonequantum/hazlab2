@@ -174,6 +174,10 @@ VERTICES_SET get_vertices(const int size, int *lines[])
 						*i_ptr++ = v_index + 1;
 					}
 
+					// Reduces the thickness of the walls (so the camera cannot get too close to them)
+					vtx.x-= (((int)vtx.x % 2) * 2 - 1) * WALLS_THICKNESS_REDUCTOR;
+					vtx.z-= (((int)vtx.z % 2) * 2 - 1) * WALLS_THICKNESS_REDUCTOR;
+
 					// Makes (x, z)==(0, 0) the center of the maze
 					vtx.x-= size / (GLfloat)2.0;
 					vtx.z-= size / (GLfloat)2.0;

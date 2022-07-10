@@ -47,6 +47,10 @@ typedef struct {
 #define MAX_MEM_OBJECTS    50
 
 
+// see genmaze.c
+#define WALLS_THICKNESS_REDUCTOR (GLfloat)0.1
+
+
 // Clipping and projection values
 #define CLIP_MIN           (GLfloat)0.0
 #define CLIP_MAX (float)(MAX_INPUT_SIZE * 4 - 1)
@@ -64,7 +68,7 @@ typedef struct {
 
 
 // Rendering values
-// See also shader-hardcoded values in render.c
+// See also shader-level hardcoded values in render.c
 #define BACKGROUND_COLOR (GLfloat)0.1, (GLfloat)0.1, (GLfloat)0.2, (GLfloat)1.0
 
 
