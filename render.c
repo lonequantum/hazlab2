@@ -169,9 +169,6 @@ bool prepare_scene(const VERTICES_SET data)
 void draw_scene(void)
 {
 	static mat4 *transform_matrix;
-
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
 	transform_matrix = get_current_transform_matrix();
 
 	glUseProgram(shader_program);
@@ -180,5 +177,6 @@ void draw_scene(void)
 	GLint projection_location = glGetUniformLocation(shader_program, "projection");
 	glUniformMatrix4fv(projection_location, 1, GL_FALSE, (GLfloat *)projection_matrix);
 
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glDrawElements(GL_TRIANGLES, n_elements, GL_UNSIGNED_INT, 0);
 }
