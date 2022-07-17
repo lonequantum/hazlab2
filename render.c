@@ -30,20 +30,44 @@ void delete_GL_data(void)
 // Source of the vertex shader
 static const GLchar *vertex_shader_src = "#version 330 core\n\
 	layout (location = 0) in vec3 position;\
+	out vec3 position_untransformed;\
 	uniform mat4 transform;\
 	uniform mat4 projection;\
 	void main()\
 	{\
 		gl_Position = projection * transform * vec4(position, 1.0);\
+		position_untransformed = position;\
+	}";
+
+
+// Source of the geometry shader
+static const GLchar *geometry_shader_src = "#version 330 core\n\
+	layout (triangles) in;\
+	layout (triangle_strip, max_vertices = 3) out;\
+	in vec3 position_untransformed[];\
+	out vec3 normal;\
+	void main()\
+	{\
+		vec3 a = position_untransformed[1] - position_untransformed[0];\
+		vec3 b = position_untransformed[2] - position_untransformed[0];\
+		normal = normalize(cross(a, b));\
+		gl_Position = gl_in[0].gl_Position;\
+		EmitVertex();\
+		gl_Position = gl_in[1].gl_Position;\
+		EmitVertex();\
+		gl_Position = gl_in[2].gl_Position;\
+		EmitVertex();\
+		EndPrimitive();\
 	}";
 
 
 // Source of the fragment shader
 static const GLchar *fragment_shader_src = "#version 330 core\n\
+	in vec3 normal;\
 	out vec4 color;\
 	void main()\
 	{\
-		color = vec4(0.1f, 0.2f, 0.4f, 1.0f);\
+		color = vec4(normal, 1.0f);\
 	}";
 
 
@@ -77,6 +101,12 @@ bool prepare_scene(const VERTICES_SET data)
 	if (!compile_shader(vertex_shader))
 		return false;
 
+	// Creates the geometry shader
+	GLuint geometry_shader = glCreateShader(GL_GEOMETRY_SHADER);
+	glShaderSource(geometry_shader, 1, &geometry_shader_src, NULL);
+	if (!compile_shader(geometry_shader))
+		return false;
+
 	// Creates the fragment shader
 	GLuint fragment_shader = glCreateShader(GL_FRAGMENT_SHADER);
 	glShaderSource(fragment_shader, 1, &fragment_shader_src, NULL);
@@ -86,6 +116,7 @@ bool prepare_scene(const VERTICES_SET data)
 	// Links shaders
 	shader_program = glCreateProgram();
 	glAttachShader(shader_program, vertex_shader);
+	glAttachShader(shader_program, geometry_shader);
 	glAttachShader(shader_program, fragment_shader);
 	glLinkProgram(shader_program);
 	GLint success;
@@ -120,6 +151,7 @@ bool prepare_scene(const VERTICES_SET data)
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glDeleteShader(vertex_shader);
 	glDeleteShader(fragment_shader);
+	glDeleteShader(geometry_shader);
 
 	// defines the fixed projection matrix
 	glm_perspective(FOV_ANGLE_RAD, (float)WINDOW_WIDTH / WINDOW_HEIGHT, CLIP_MIN, CLIP_MAX, projection_matrix);
