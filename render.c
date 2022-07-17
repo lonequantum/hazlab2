@@ -168,9 +168,11 @@ bool prepare_scene(const VERTICES_SET data)
 // Draws the whole scene
 void draw_scene(void)
 {
+	static mat4 *transform_matrix;
+
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	mat4 *transform_matrix = get_current_transform_matrix();
+	transform_matrix = get_current_transform_matrix();
 
 	glUseProgram(shader_program);
 	GLint transform_location = glGetUniformLocation(shader_program, "transform");
