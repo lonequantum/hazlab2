@@ -95,6 +95,8 @@ bool prepare_scene(const VERTICES_SET data)
 {
 	n_elements = data.i_length;
 
+	glClearColor(BACKGROUND_COLOR);
+
 	// Creates the vertex shader
 	GLuint vertex_shader = glCreateShader(GL_VERTEX_SHADER);
 	glShaderSource(vertex_shader, 1, &vertex_shader_src, NULL);
@@ -166,7 +168,6 @@ bool prepare_scene(const VERTICES_SET data)
 // Draws the whole scene
 void draw_scene(void)
 {
-	glClearColor(BACKGROUND_COLOR);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	mat4 *transform_matrix = get_current_transform_matrix();
