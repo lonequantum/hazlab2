@@ -28,7 +28,8 @@ You need the GLFW3 library; for example on Debian run `apt install libglfw3 libg
 
 Install [glad](https://glad.dav1d.de/).  
 Select Language C/C++, Specification OpenGL, API gl 3.3 (gles1/2/3 None), Profile Core, no extension, Generate a loader.  
-Copy the content of the generated `include` folder to your system (`/usr/local/include/`).
+Copy the content of the generated `include` folder to your system (`/usr/local/include/`).  
+Also, copy `glad.c` into the hazlab2 project folder, next to the other C source files.
 
 Install (system-wide) [cglm 0.8.5](https://github.com/recp/cglm/tree/v0.8.5#-build).
 
