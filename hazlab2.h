@@ -52,7 +52,7 @@ typedef struct {
 
 
 // Clipping and projection values
-#define CLIP_MIN          0.0f
+#define CLIP_MIN          0.1f
 #define CLIP_MAX (float)(MAX_INPUT_SIZE * 4 - 1)
 #define FOV_ANGLE_RAD     1.0f
 

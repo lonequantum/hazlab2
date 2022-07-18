@@ -45,6 +45,8 @@ static GLFWwindow *start_graphics(unsigned int antialias_samples)
 	glfwSetWindowSizeLimits(window, WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_WIDTH, WINDOW_HEIGHT);
 	glViewport(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
 
+	glEnable(GL_DEPTH_TEST);
+
 	return window;
 }
 
