@@ -74,7 +74,7 @@ typedef struct {
 
 // Rendering values
 // See also shader-level hardcoded values in render.c
-#define BACKGROUND_COLOR (GLfloat)0.1, (GLfloat)0.2, (GLfloat)0.3, (GLfloat)1.0
+#define SKY_COLOR (GLfloat)0.1, (GLfloat)0.2, (GLfloat)0.3, (GLfloat)1.0
 
 
 // printf to standard error

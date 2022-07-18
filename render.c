@@ -107,7 +107,7 @@ bool prepare_scene(const VERTICES_SET data)
 {
 	n_elements = data.i_length;
 
-	glClearColor(BACKGROUND_COLOR);
+	glClearColor(SKY_COLOR);
 
 	// Creates the vertex shader
 	GLuint vertex_shader = glCreateShader(GL_VERTEX_SHADER);
