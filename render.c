@@ -74,7 +74,7 @@ static const GLchar *fragment_shader_src = "#version 330 core\n\
 	void main()\
 	{\
 		vec3 light_color = vec3(1.0, 1.0, 1.0);\
-		vec3 walls_color = vec3(0.2, 0.4, 0.8);\
+		vec3 walls_color = vec3(0.6, 0.4, 0.2);\
 		float ambient = 0.1;\
 		\
 		vec3 light = normalize(fragment_position - light_position);\
