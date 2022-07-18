@@ -46,16 +46,20 @@ static const GLchar *geometry_shader_src = "#version 330 core\n\
 	layout (triangle_strip, max_vertices = 3) out;\
 	in vec3 position_untransformed[];\
 	out vec3 normal;\
+	out vec3 fragment_position;\
 	void main()\
 	{\
 		vec3 a = position_untransformed[1] - position_untransformed[0];\
 		vec3 b = position_untransformed[2] - position_untransformed[0];\
 		normal = normalize(cross(a, b));\
 		gl_Position = gl_in[0].gl_Position;\
+		fragment_position = position_untransformed[0];\
 		EmitVertex();\
 		gl_Position = gl_in[1].gl_Position;\
+		fragment_position = position_untransformed[1];\
 		EmitVertex();\
 		gl_Position = gl_in[2].gl_Position;\
+		fragment_position = position_untransformed[2];\
 		EmitVertex();\
 		EndPrimitive();\
 	}";
@@ -64,11 +68,14 @@ static const GLchar *geometry_shader_src = "#version 330 core\n\
 // Source of the fragment shader
 static const GLchar *fragment_shader_src = "#version 330 core\n\
 	in vec3 normal;\
+	in vec3 fragment_position;\
 	out vec4 color;\
 	uniform vec3 light_position;\
 	void main()\
 	{\
-		color = vec4(normal, 1.0f);\
+		vec3 light = normalize(fragment_position - light_position);\
+		vec3 diffuse = max(dot(normal, light), 0.0) * vec3(1.0, 1.0, 1.0);\
+		color = vec4((0.1 + diffuse) * vec3(0.2, 0.4, 0.8), 1.0f);\
 	}";
 
 
