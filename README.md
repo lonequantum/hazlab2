@@ -19,7 +19,6 @@ Changes from Hazlab:
 THIS IS STILL A WORK IN PROGRESS  
 TODOS:
 - sky / ground?
-- lighting
 - nice ending when the exit is reached (instead of brutal program quit)
 
 ## Build
