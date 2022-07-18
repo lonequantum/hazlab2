@@ -22,6 +22,10 @@ mat4 *get_current_transform_matrix(void)
 {
 	return &current_transform_matrix;
 }
+vec3 *get_user_position(void)
+{
+	return &user_position;
+}
 
 
 #define user_x user_position[0]

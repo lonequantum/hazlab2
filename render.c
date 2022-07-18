@@ -65,6 +65,7 @@ static const GLchar *geometry_shader_src = "#version 330 core\n\
 static const GLchar *fragment_shader_src = "#version 330 core\n\
 	in vec3 normal;\
 	out vec4 color;\
+	uniform vec3 light_position;\
 	void main()\
 	{\
 		color = vec4(normal, 1.0f);\
@@ -171,11 +172,19 @@ void draw_scene(void)
 	static mat4 *transform_matrix;
 	transform_matrix = get_current_transform_matrix();
 
+	static vec3 *light_position;
+	light_position = get_user_position();
+
 	glUseProgram(shader_program);
+
 	GLint transform_location = glGetUniformLocation(shader_program, "transform");
 	glUniformMatrix4fv(transform_location, 1, GL_FALSE, (GLfloat *)transform_matrix);
+
 	GLint projection_location = glGetUniformLocation(shader_program, "projection");
 	glUniformMatrix4fv(projection_location, 1, GL_FALSE, (GLfloat *)projection_matrix);
+
+	GLint light_position_location = glGetUniformLocation(shader_program, "light_position");
+	glUniform3fv(light_position_location, 1, (GLfloat *)light_position);
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glDrawElements(GL_TRIANGLES, n_elements, GL_UNSIGNED_INT, 0);

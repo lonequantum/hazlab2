@@ -112,6 +112,7 @@ void    delete_GL_data(void);
 
 // move.c
 mat4   *get_current_transform_matrix(void);
+vec3   *get_user_position(void);
 void    process_input(GLFWwindow *, const int, const int *const []);
 
 
