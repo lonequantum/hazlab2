@@ -124,10 +124,11 @@ int **generate_matrix(const int size, const bool perfect)
 
 
 // Returns a set of ordered vertices that models the walls of the given maze-matrix (2 triangles per rectangle surface)
+// Also models the ground (4 vertices, 6 indices)
 // It needs to modify, temporarily, the matrix itself
 VERTICES_SET get_vertices(const int size, int *lines[])
 {
-	// Checks the number of needed vertices
+	// Checks the number of needed vertices (walls only)
 	GLsizei n_vertices = 0;
 	for (int i = 0; i < size; i+= 2)
 		for (int j = 0; j < size; j+= 2)
@@ -146,10 +147,21 @@ VERTICES_SET get_vertices(const int size, int *lines[])
 #endif
 	n_vertices*= 2; // 2 vertices per angle
 
-	VERTEX *vertices = allocate(n_vertices * sizeof(VERTEX));
-	GLsizei v_index = 0;
+	VERTEX vtx, *vertices = allocate((n_vertices + 4) * sizeof(VERTEX));
 
-	GLuint *indices = allocate(3 * n_vertices * sizeof(GLuint)); // each vertex will be used for 3 triangles
+	// Ground coordinates
+	vtx.x = -size / (GLfloat)2.0; vtx.y = (GLfloat)-0.5; vtx.z = -size / (GLfloat)2.0; //SW
+	vertices[0] = vtx;
+	vtx.x =  size / (GLfloat)2.0; vtx.y = (GLfloat)-0.5; vtx.z = -size / (GLfloat)2.0; //SE
+	vertices[1] = vtx;
+	vtx.x = -size / (GLfloat)2.0; vtx.y = (GLfloat)-0.5; vtx.z =  size / (GLfloat)2.0; //NW
+	vertices[2] = vtx;
+	vtx.x =  size / (GLfloat)2.0; vtx.y = (GLfloat)-0.5; vtx.z =  size / (GLfloat)2.0; //NE
+	vertices[3] = vtx;
+
+	GLsizei v_index = 4;
+
+	GLuint *indices = allocate((3 * n_vertices + 6) * sizeof(GLuint)); // each vertex will be used for 3 triangles, + 6 indices for the ground (2 triangles)
 	GLuint *i_ptr = indices;
 
 	// Computes the final vertices for contiguous walls
@@ -254,6 +266,14 @@ VERTICES_SET get_vertices(const int size, int *lines[])
 				flood_fill(size, lines, i, j, 0, -1);
 			}
 
+	// Ground indices
+	*i_ptr++ = 0;
+	*i_ptr++ = 1;
+	*i_ptr++ = 2;
+	*i_ptr++ = 2;
+	*i_ptr++ = 1;
+	*i_ptr++ = 3;
+
 	// Reverts the matrix to its previous state
 	for (int i = 0; i < size; i++)
 		for (int j = 0; j < size; j++)
@@ -261,8 +281,8 @@ VERTICES_SET get_vertices(const int size, int *lines[])
 				lines[i][j] = 0;
 
 	VERTICES_SET ret = {
-		.v_length = n_vertices,
-		.i_length = 3 * n_vertices,
+		.v_length = n_vertices + 4,
+		.i_length = 3 * n_vertices + 6,
 		.vertices = vertices,
 		.indices = indices
 	};
