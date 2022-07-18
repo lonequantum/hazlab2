@@ -75,11 +75,11 @@ static const GLchar *fragment_shader_src = "#version 330 core\n\
 	{\
 		vec3 light_color = vec3(1.0, 1.0, 1.0);\
 		vec3 walls_color = vec3(0.2, 0.4, 0.8);\
-		float ambient_coeff = 0.1;\
+		float ambient = 0.1;\
 		\
 		vec3 light = normalize(fragment_position - light_position);\
 		vec3 diffuse = max(dot(normal, light), 0.0) * light_color;\
-		color = vec4((ambient_coeff + diffuse) * walls_color, 1.0f);\
+		color = vec4((ambient + diffuse) * walls_color, 1.0f);\
 	}";
 
 
