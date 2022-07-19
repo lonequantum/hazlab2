@@ -47,3 +47,5 @@ A value of 1 is of no interest (just for test/debug purpose).
 The `-p` option tells hazlab2 to create a perfect maze (no loops). Otherwise there *may* be loops in it (the smaller the maze is, the highest probability it's perfect, even without `-p`).
 
 The `-a` option controls MSAA (`n` samples). The default is 2, the max is 8. Set it to 0 to disable AA.
+
+Once the game is launched, just use the arrow keys to navigate through the maze.
