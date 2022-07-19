@@ -1,13 +1,16 @@
 # Hazlab2
 A "2D random maze" game, navigate through it in 3D
 
+![Hazlab2 screenshot](/screenshot.png)
+
 This is a rewritten-from-scratch, modified version of [my previous Hazlab project](https://github.com/zareldyn/hazlab).  
 The goal is still to provide an example of simple 3D-graphics application, while being a programming training for me.
 
 Changes from Hazlab:
 - command line for choosing the size (rather than a graphical menu)
 - the command line also permits to make a no-loop ("perfect") maze, by default a non-perfect maze is generated
-- no textures
+- diffuse lighting instead of textures
+- one point of view only (first person)
 - fixed window size (not resizable, no fullscreen)
 - written in C99 instead of C90
 - use of GLFW instead of GLUT
@@ -16,10 +19,8 @@ Changes from Hazlab:
 - better algorithms
 - MSAA
 
-THIS IS STILL A WORK IN PROGRESS  
 TODOS:
 - add something?
-- change colors?
 - nice ending when the exit is reached (instead of brutal program quit)
 
 ## Build
